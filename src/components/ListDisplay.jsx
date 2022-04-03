@@ -66,12 +66,14 @@ export function ListDisplay() {
         return (
           isValidIndex(index) && (
             <>
-              <div key={el.id} className={styles.row}>
+              <div key={el.id} className={styles.row}
+                style={{ backgroundColor: `${data.selectedIds.includes(el.id) ? 'rgb(230, 230, 230)' : 'transparent'}` }}
+              >
                 {/* {console.log(data)} */}
                 <input
                   type="checkbox"
                   onChange={(e) => handleCheck(e.target.checked, el.id)}
-                  checked={data.selectedIds.includes(el.id) ? true : false}
+                  checked={data.selectedIds.includes(el.id) ? true : false}                  
                 />
                 <input className={styles.valuebox} value={el.name} disabled={data.editableIds.includes(el.id)?false:true}/>
                 <input className={styles.valuebox} value={el.email} disabled={data.editableIds.includes(el.id)?false:true}/>
