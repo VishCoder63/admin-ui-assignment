@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./css/listDisplay.module.css";
-import { BiEdit } from "react-icons/bi";
-import { RiDeleteBin7Line } from "react-icons/ri";
+
 import { maxRowsPerPage } from "../constants";
 import {
   deleteSelected,
@@ -12,6 +11,7 @@ import {
   startEdit,
   toggleEditable,
 } from "../Redux/Actions";
+import { Row } from "./Row";
 export function ListDisplay() {
   const data = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -33,10 +33,8 @@ export function ListDisplay() {
   }
 
   function handleEditClick(id) {
-    if(data.editableIds.includes(id))
-      dispatch(endEdit(id))
-    else 
-      dispatch(startEdit(id))
+    if (data.editableIds.includes(id)) dispatch(endEdit(id));
+    else dispatch(startEdit(id));
   }
   function handleDeleteClick(id) {
     if (window.confirm("Are you sure?")) {
@@ -48,7 +46,6 @@ export function ListDisplay() {
     <div className={styles.mainContainer}>
       <div className={styles.headingRow}>
         <input type="checkbox" onClick={handleAllSelect} />
-        {console.log(data.currPage, data.allSelectPageNo)}
         <div>
           <b>Name</b>
         </div>
@@ -65,32 +62,14 @@ export function ListDisplay() {
       {data.filteredData.map((el, index) => {
         return (
           isValidIndex(index) && (
-            <>
-              <div key={el.id} className={styles.row}
-                style={{ backgroundColor: `${data.selectedIds.includes(el.id) ? 'rgb(230, 230, 230)' : 'transparent'}` }}
-              >
-                {/* {console.log(data)} */}
-                <input
-                  type="checkbox"
-                  onChange={(e) => handleCheck(e.target.checked, el.id)}
-                  checked={data.selectedIds.includes(el.id) ? true : false}                  
-                />
-                <input className={styles.valuebox} value={el.name} disabled={data.editableIds.includes(el.id)?false:true}/>
-                <input className={styles.valuebox} value={el.email} disabled={data.editableIds.includes(el.id)?false:true}/>
-                <input className={styles.valuebox} value={el.role} disabled={data.editableIds.includes(el.id)?false:true}/>
-                <div>
-                  <button>
-                    <BiEdit size={20} onClick={() => handleEditClick(el.id)} />
-                  </button>
-                  <button>
-                    <RiDeleteBin7Line
-                      size={20}
-                      onClick={() => handleDeleteClick(el.id)}
-                    />
-                  </button>
-                </div>
-              </div>
-            </>
+            <Row
+              key={el.id}
+              el={el}
+              styles={styles}
+              handleCheck={handleCheck}
+              handleEditClick={handleEditClick}
+              handleDeleteClick={handleDeleteClick}
+            />
           )
         );
       })}

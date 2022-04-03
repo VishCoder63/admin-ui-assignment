@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { Search } from "./components/Search";
 import { ListDisplay } from "./components/ListDisplay";
