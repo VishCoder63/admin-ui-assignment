@@ -1,0 +1,29 @@
+.mainContainer{
+  /* border: 1px solid red; */
+}
+
+.row,.headingRow{
+  border-bottom: 2px solid teal;
+  height: 2.5rem;
+  margin:.5rem 0; 
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.row>div,.headingRow>div{
+/* border: 1px solid red; */
+width: 20%;
+}
+.headingRow{
+
+}
+
+.row>div button{
+border: none;
+margin: 3px;
+background-color: transparent;
+}
+
+.valuebox{
+ background-color: none;
+}
